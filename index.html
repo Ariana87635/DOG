@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor Taypa</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4a90e2;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #50e3c2;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #4a90e2;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #4a90e2;
+        }
+
+        /* Estilos del botón */
+        .button {
+            background-color: #f5a623;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #e07b39;
+        }
+
+        /* Estilos del formulario */
+        .form-container {
+            display: none;
+            padding: 20px;
+            background-color: #f4f4f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #50e3c2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #4a90e2;
+        }
+
+        /* Estilos específicos para subcategorías */
+        .subcategory {
+            display: none;
+            padding: 20px;
+            background-color: #e6f5f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sabor Taypa</h1>
+        <p>La mejor tienda para tus mascotas</p>
+    </header>
+
+    <nav>
+        <a href="#" onclick="showSection('inicio')">Inicio</a>
+        <a href="#" onclick="showSection('perros')">Perros</a>
+        <a href="#" onclick="showSection('adiestramiento')">Adiestramiento Canino</a>
+        <a href="#" onclick="showSection('croquetas')">Croquetas</a>
+        <a href="#" onclick="showSection('ubicacion')">Ubicación</a>
+        <a href="#" onclick="showForm()">Registro Clientes</a>
+    </nav>
+
+    <div class="container" id="inicio">
+        <h2>Bienvenido a Sabor Taypa</h2>
+        <p>Explora nuestros productos y servicios para el bienestar de tus mascotas.</p>
+    </div>
+
+    <div class="container" id="perros" style="display: none;">
+        <h2>Productos para Perros</h2>
+        <p>Selecciona el tamaño de tu perro para ver nuestros productos.</p>
+        <button class="button" onclick="showSubcategory('grandes')">Perros Grandes</button>
+        <button class="button" onclick="showSubcategory('pequenos')">Perros Pequeños</button>
+
+        <div id="grandes" class="subcategory">
+            <h3>Productos para Perros Grandes</h3>
+            <p>Explora nuestros productos ideales para perros de gran tamaño.</p>
+        </div>
+
+        <div id="pequenos" class="subcategory">
+            <h3>Productos para Perros Pequeños</h3>
+            <p>Descubre lo mejor para tu mascota de tamaño pequeño.</p>
+        </div>
+    </div>
+
+    <div class="container" id="adiestramiento" style="display: none;">
+        <h2>Adiestramiento Canino</h2>
+        <p>Consulta nuestros servicios de adiestramiento canino para mejorar la conducta de tu perro.</p>
+    </div>
+
+    <div class="container" id="croquetas" style="display: none;">
+        <h2>Croquetas y Alimentos</h2>
+        <p>Encuentra croquetas y alimentos nutritivos para todas las razas y edades.</p>
+    </div>
+
+    <div class="container" id="ubicacion" style="display: none;">
+        <h2>Nuestra Ubicación</h2>
+        <p>Visítanos en nuestra tienda física y conoce nuestros productos en persona.</p>
+    </div>
+
+    <div class="form-container" id="formulario">
+        <h2>Registro de Clientes</h2>
+        <p>Llena este formulario para registrarte y recibir nuestras novedades.</p>
+        <input type="text" id="nombre" placeholder="Nombre Completo" required>
+        <input type="email" id="email" placeholder="Correo Electrónico" required>
+        <input type="tel" id="telefono" placeholder="Teléfono" required>
+        <button onclick="registrarCliente()">Enviar</button>
+    </div>
+
+    <script>
+        // Mostrar secciones y subcategorías
+        function showSection(sectionId) {
+            let sections = document.querySelectorAll('.container');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function showSubcategory(subcategoryId) {
+            let subcategories = document.querySelectorAll('.subcategory');
+            subcategories.forEach(subcat => subcat.style.display = 'none');
+            document.getElementById(subcategoryId).style.display = 'block';
+        }
+
+        // Mostrar y ocultar formulario de registro
+        function showForm() {
+            let form = document.getElementById('formulario');
+            form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+        }
+
+        // Función para registrar cliente (simulación)
+        function registrarCliente() {
+            let nombre = document.getElementById('nombre').value;
+            let email = document.getElementById('email').value;
+            let telefono = document.getElementById('telefono').value;
+            
+            if (nombre && email && telefono) {
+                alert(`Gracias ${nombre}, tu registro ha sido exitoso!`);
+                document.getElementById('formulario').reset();
+                showForm();
+            } else {
+                alert('Por favor completa todos los campos.');
+            }
+        }
+    </script>
+
+</body>
+</html>
